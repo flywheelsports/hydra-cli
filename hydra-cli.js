@@ -526,8 +526,6 @@ class Program {
           });
           hydra.makeAPIRequest(msg)
             .then((res) => {
-              res.result = res.payLoad.toString('utf8');
-              delete res.payLoad;
               this.displayJSON(res);
               this.exitApp();
             })
@@ -549,8 +547,6 @@ class Program {
       });
       hydra.makeAPIRequest(msg)
         .then((res) => {
-          res.result = res.payLoad.toString('utf8');
-          delete res.payLoad;
           this.displayJSON(res);
           this.exitApp();
         })
