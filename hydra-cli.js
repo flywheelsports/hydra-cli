@@ -12,6 +12,9 @@ const UMFMessage = hydra.getUMFMessageHelper();
 
 const CONFIG_FILE_VERSION = 2;
 
+// Works like the es2020 ?? operator
+const nCoalescg = (...args) => args.find((el) => el != null && el != undefined);
+
 /**
  * @name Program
  */
@@ -626,7 +629,7 @@ class Program {
           });
           hydra.makeAPIRequest(msg)
             .then((res) => {
-              if ((res.payLoad ?? res) == undefined) {
+              if (nCoalescg(res.payLoad, res) == undefined) {
                 console.trace(`Error parsing response from service.`);
                 this.exitApp();
                 return;
@@ -666,7 +669,7 @@ class Program {
       });
       hydra.makeAPIRequest(msg)
         .then((res) => {
-          if ((res.payLoad ?? res) == undefined) {
+          if (nCoalescg(res.payLoad, res) == undefined) {
             console.trace(`Error parsing response from service.`);
             this.exitApp();
             return;
